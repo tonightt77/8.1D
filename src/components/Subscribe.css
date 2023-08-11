@@ -1,0 +1,33 @@
+.signup-block {
+    background-color: rgba(4, 79, 80, 0.427);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 10px;
+    color: black;
+}
+
+.signup-block p {
+    font-weight: bold;
+    /* margin left and right*/
+    margin-inline: 10px;
+    margin-block: 10px;
+}
+
+.signup-block input {
+    margin-inline-end: 10px;
+    padding: 5px;
+    margin-left: 5px;
+}
+
+
+/* .signup-block Button {
+    background-color: rgba(118, 115, 115, 0.674);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+} */

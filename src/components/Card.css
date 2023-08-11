@@ -1,0 +1,47 @@
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    /* This ensures that items will wrap to the next line if there are more than 3 */
+}
+
+.column {
+    flex: 0 0 33.33%;
+    padding: 5px;
+    box-sizing: border-box;
+    /* This ensures padding doesn't affect the total width */
+    height: 100%;
+}
+
+.column img {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.column .rating {
+    width: 60%;
+}
+
+.column .rating span {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.see-more-btn {
+    padding: 10px 20px;
+    margin-block: 10px;
+    background-color: #007BFF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.see-more-btn:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
