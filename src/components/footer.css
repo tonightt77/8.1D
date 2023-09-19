@@ -22,6 +22,8 @@
 .footer_top_left h3,
 .footer_top_mid h3,
 .footer_top_right h3 {
+    display: flex;
+    justify-content: center;
     border-bottom: 2px solid #ecf0f1; /* Light border color */
     padding-bottom: 10px;
     margin-bottom: 10px;
@@ -30,6 +32,8 @@
 .footer_top_left li,
 .footer_top_mid li,
 .footer_top_right li {
+    display: flex;
+    justify-content: center;
     list-style-type: none;
     margin-bottom: 5px;
 }
@@ -52,8 +56,9 @@
     align-items: center;
 }
 
-.footer_top_right .Icon {
-    margin-right: 10px;
+.icon{
+    display: flex;
+    justify-content: center;
 }
 
 .footer_bottom {

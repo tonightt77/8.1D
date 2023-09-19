@@ -20,10 +20,12 @@ const Footer = () => {
             </div>
             <div className="footer_top_right">
                 <h3>Stay Connected</h3>
+                <div className="icon">
                 <Icon name='facebook square' size='big' />
                 <Icon name='twitter' size='big'/>
                 <Icon name='instagram' size='big'/>
-            </div>           
+                </div>
+            </div>        
         </div>
         <div className="footer_bottom">
             <li><a href="#">Privacy Policy</a></li>

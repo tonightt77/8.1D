@@ -27,6 +27,8 @@ const FreeLancerList = () => {
                     />
                 ))}
             </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+
             {cardsToDisplay.length < staffList.length && (
                 <Button primary animated='vertical' onClick={handleSeeMore}>
                     <Button.Content visible>See More</Button.Content>
@@ -35,6 +37,7 @@ const FreeLancerList = () => {
                     </Button.Content>
                 </Button>
             )}
+            </div>
         </div>
     );
 }

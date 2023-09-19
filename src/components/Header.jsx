@@ -1,49 +1,91 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import ImageFluid from './HeaderImg'
+import { useAuth } from '../AuthContext';
+import { useLocation } from 'react-router-dom';
 
-export default class MenuExampleHeader extends Component {
-  state = {}
+const MenuExampleHeader = () => {
+  const [activeItem, setActiveItem] = useState('');
+  const auth = useAuth();
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  const location = useLocation();
+  useEffect(() => {
+    const currentPath = location.pathname;
+    switch (currentPath) {
+      case '/find-dev':
+        setActiveItem('Find DEV');
+        break;
+      case '/find-job':
+        setActiveItem('Find Jobs');
+        break;
+      case '/login':
+        setActiveItem('Login');
+        break;
+      case '/register':
+        setActiveItem('Create Account');
+        break;
+      default:
+        setActiveItem('');
+    }
+  }, [location]);
 
-  render() {
-    const { activeItem } = this.state
+  const handleItemClick = (e, { name }) => {
+    setActiveItem(name);
+  };
 
-    return (
-    <div>      
-        <Menu inverted>
-        <Menu.Item
-            name='DevLink Marketplace'
-            onClick={this.handleItemClick}
-        />
-        {/* make all the item to the right side */}
-        <Menu.Menu position='right'>
-        <Menu.Item
-          name='Find DEV'
-          active={activeItem === 'Find DEV'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='Find Jobs'
-          active={activeItem === 'Find Jobs'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='Login'
-          active={activeItem === 'Login'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='Create Account'
-          active={activeItem === 'Create Account'}
-          onClick={this.handleItemClick}
-        />
-        </Menu.Menu>  
+  return (
+    <div>
+      <Menu inverted>
+        <Link to="/">
+          <Menu.Item
+            name="DevLink Marketplace"
+            onClick={handleItemClick}
+          />
+        </Link>
+        <Menu.Menu position="right">
+          <Link to="/find-dev">
+            <Menu.Item
+              name="Find DEV"
+              active={activeItem === "Find DEV"}
+              onClick={handleItemClick}
+            />
+          </Link>
+          <Link to="/find-job">
+            <Menu.Item
+              name="Find Jobs"
+              active={activeItem === "Find Jobs"}
+              onClick={handleItemClick}
+            />
+          </Link>
+          {auth.isLoggedIn ? (
+            <Menu.Item
+              name="Logout"
+              onClick={auth.logout}
+            />
+          ) : (
+            <>
+              <Link to="/login">
+                <Menu.Item
+                  name="Login"
+                  active={activeItem === "Login"}
+                  onClick={handleItemClick}
+                />
+              </Link>
+              <Link to="/register">
+                <Menu.Item
+                  name="Create Account"
+                  active={activeItem === "Create Account"}
+                  onClick={handleItemClick}
+                />
+              </Link>
+            </>
+          )}
+        </Menu.Menu>
       </Menu>
-    <ImageFluid />
+      <ImageFluid />
     </div>
-          
-    )
-  }
-}
+  );
+};
+
+export default MenuExampleHeader;
