@@ -1,7 +1,13 @@
 import React from 'react';
+import JobList from '../form/JobList';
 
 const FindJob = () => {
-<h1>Find Job</h1>
+
+    return (
+        <div>
+            <JobList />
+        </div>
+    );
 }
 
 export default FindJob

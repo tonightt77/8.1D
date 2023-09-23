@@ -3,7 +3,7 @@ import { Button, Checkbox, Form } from "semantic-ui-react";
 import "../components/CustomForm.css"
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import {auth} from "../firebaseConfig"
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
 
@@ -64,14 +64,17 @@ const handleRegister = async () => {
     return;
   }
   try {
-    await createUserWithEmailAndPassword(
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       formData.email,
       formData.password
     );
 
+    // get the user id
+    const uid = userCredential.user.uid;
+
     // Add user details to Firestore
-    await addDoc(collection(db, "users"), {
+    await setDoc(doc(db, "users", uid), {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,

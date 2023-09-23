@@ -1,0 +1,27 @@
+.Jobs {
+  background-color:rgba(198, 195, 195, 0.461);
+}
+
+.Jobs h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  padding-top: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+/* JobList styling */
+.job-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Adjusts the spacing between the cards */
+    margin: 0 auto;}
+  
+
+  
+  /* img styling */
+  .job-list .content img {
+    width: auto;
+    max-height: 120px;
+    object-fit: cover; /* Ensures the image doesn't break its container's boundaries */  }
+  

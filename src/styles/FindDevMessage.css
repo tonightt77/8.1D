@@ -1,0 +1,36 @@
+/* Authentication Message */
+
+.authentication-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f7f7f7;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.authentication-message-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.authentication-message h3,
+.authentication-message h1,
+.authentication-message p {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.authentication-message img {
+    max-width: 30%;
+    height: auto;
+    margin-left: 20px;
+}
