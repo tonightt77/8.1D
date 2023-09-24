@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import CustomInput from "./Input";
 import Title from "./Title";
 import P from "./P";
@@ -44,6 +45,7 @@ function MyForm() {
     setImage(e.target.files[0]);
 };
 
+const navigate = useNavigate();
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -62,6 +64,7 @@ const handleSubmit = async (e) => {
 
     console.log("Job posted successfully");
     alert("Job posted successfully");
+    navigate('/find-job');
   } else {
     console.error("No user is logged in");
   }

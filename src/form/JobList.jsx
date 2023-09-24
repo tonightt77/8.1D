@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { collection, getDocs, query, orderBy, limit, startAfter, where } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import JobCard from './components/JobCard';
@@ -85,6 +86,14 @@ function JobList() {
           value={searchQuery}
           onChange={setSearchQuery}
         />
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Link to="/find-dev">
+        <Button color="blue" animated='fade'>
+      <Button.Content visible>Post a New Job</Button.Content>
+      <Button.Content hidden><Icon name="plus" /></Button.Content>
+    </Button>
+      </Link>
+      </div>
       </div>
       <div className="job-list">
         {jobs.filter(job => !hiddenJobs.includes(job.id)).map((job) => (

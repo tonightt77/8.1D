@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "./JobCard.css";
 
 const JobCard = (props) => {
-  const [isExpanded, setIsExpanded] = useState(false);
   const cardRef = useRef();
 
   console.log(`Card ${props.id} isExpanded:`, props.isExpanded);
