@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 import { Button, Checkbox, Form } from "semantic-ui-react";
 import "../components/CustomForm.css"
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import {auth} from "../firebaseConfig"
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
