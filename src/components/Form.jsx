@@ -41,8 +41,7 @@ const CustomForm = ({ formType }) => {
 
   const handleLogin = async () => {
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      authContext.login(); // Update the logged-in state
+      await authContext.login(formData.email, formData.password);
       navigate('/');// Redirect to home after successful login
 
     } catch (error) {
@@ -58,22 +57,28 @@ const CustomForm = ({ formType }) => {
 };
 
 const handleRegister = async () => {
+  // Validate the form data
   if (formData.password !== formData.confirmPassword) {
     console.error("Passwords do not match");
     alert("Passwords do not match. Please try again.");
     return;
   }
-  try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      formData.email,
-      formData.password
-    );
 
-    // get the user id
+  if (!formData.termsAccepted) {
+    console.error("Terms and Conditions not accepted");
+    alert("Please accept the Terms and Conditions to proceed.");
+    return;
+  }
+
+  // If form data is valid, attempt to register the user
+  try {
+    // Register the user using Firebase Authentication
+    const userCredential = await authContext.register(formData.email, formData.password);
+
+    // Get the user ID from the user credential
     const uid = userCredential.user.uid;
 
-    // Add user details to Firestore
+    // Store additional user details in Firestore
     await setDoc(doc(db, "users", uid), {
       firstName: formData.firstName,
       lastName: formData.lastName,
@@ -81,17 +86,22 @@ const handleRegister = async () => {
       password: formData.password,
     });
 
-    navigate('/login');  // Redirect to login after successful registration
-
+    // Navigate to the login page after successful registration
+    navigate('/login');
   } catch (error) {
     console.error("Error registering:", error.message);
-    if (error.code === "auth/weak-password") {
+
+    // Handle specific error codes and display appropriate error messages
+    if (error.code === "auth/email-already-in-use") {
+      alert("The email address is already in use by another account.");
+    } else if (error.code === "auth/weak-password") {
       alert("Password should be at least 6 characters long.");
     } else {
       alert("An error occurred during registration. Please try again.");
     }
   }
 };
+
 
   const [isLoading, setIsLoading] = useState(false);
 
