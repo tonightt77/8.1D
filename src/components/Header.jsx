@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 import ImageFluid from './HeaderImg'
 import { useAuth } from '../AuthContext';
-import { useLocation } from 'react-router-dom';
 
 const MenuExampleHeader = () => {
   const [activeItem, setActiveItem] = useState('');
