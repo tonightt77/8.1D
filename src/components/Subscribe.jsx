@@ -10,12 +10,14 @@ const Subscribe = () => {
     e.preventDefault();
 
     try {
+      console.log("Email from state:", email);
+
       const response = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: email }),
       });
 
       const data = await response.json();
