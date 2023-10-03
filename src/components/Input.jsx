@@ -1,14 +1,16 @@
-import React from 'react'
-import { Icon, Input } from 'semantic-ui-react'
+import React from 'react';
+import { Icon, Input } from 'semantic-ui-react';
 
 const InputIconChild = (props) => {
   return (
-    <div>
-      <Input type={props.type} iconPosition="left">
-        <Icon name="at" />
-      </Input>
-      <input style={{ marginLeft: "30px" }} />
-    </div>
+    <Input 
+      type={props.type} 
+      iconPosition="left" 
+      icon={<Icon name="at" />}
+      value={props.value}
+      onChange={props.onChange}
+    />
   );
 };
-export default InputIconChild
+
+export default InputIconChild;
