@@ -9,11 +9,13 @@ const mg = mailgun.client({
 
 exports.handler = async (event, context) => {
     if (event.httpMethod !== "POST") {
-        return { statusCode: 405, body: "Method Not Allowed" };
+        return { statusCode: 405, body: JSON.stringify({error :"Method Not Allowed"}) };
     }
 
     const params = JSON.parse(event.body);
     const email = params.email;
+
+    console.log("Email to send to:", email);
 
     try {
         await mg.messages.create('sandbox5a8030a5a8b4433ba5f769c3ea2c706e.mailgun.org', {
@@ -31,7 +33,7 @@ exports.handler = async (event, context) => {
         console.error(err);
         return {
             statusCode: 500,
-            body: "Error sending email."
+            body: JSON.stringify({ error: "Error sending email." })
         };
     }
 };
