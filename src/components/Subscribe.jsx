@@ -8,7 +8,7 @@ const Subscribe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email from state:", email);
+    console.log("Email: ", email);
 
     try {
 
