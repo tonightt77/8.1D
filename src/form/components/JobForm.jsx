@@ -110,7 +110,13 @@ const handleSubmit = async (e) => {
 
   return (
     <form className="JobForm" onSubmit={handleSubmit}>
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "3px solid #e0e0e0"}}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "3px solid #e0e0e0",
+        }}
+      >
         <P text="Select job type" />
         <label>
           <input
@@ -131,9 +137,14 @@ const handleSubmit = async (e) => {
           Employment
         </label>
       </div>
-
       <Title text="Describe your job" />
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #e0e0e0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "2px solid #e0e0e0",
+        }}
+      >
         <P text="Title/Position" />
         <CustomInput
           type="text"
@@ -142,8 +153,13 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
         />
       </div>
-
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #e0e0e0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "2px solid #e0e0e0",
+        }}
+      >
         <P text="Job Description" />
         <CustomInput
           type="text"
@@ -154,7 +170,6 @@ const handleSubmit = async (e) => {
           height={80}
         />
       </div>
-
       <div style={{ display: "flex", alignItems: "center" }}>
         <P text="Skills" />
         <CustomInput
@@ -166,13 +181,23 @@ const handleSubmit = async (e) => {
           width={680}
         />
       </div>
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #e0e0e0" }}>
-      <P text="Developers will find your job based on the skills you added here." />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "2px solid #e0e0e0",
+        }}
+      >
+        <P text="Developers will find your job based on the skills you added here." />
       </div>
-
       <Title text="Project conditions" />
-
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #e0e0e0" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "2px solid #e0e0e0",
+        }}
+      >
         <P text="Project Length" />
         <CustomInput
           type="text"
@@ -181,13 +206,12 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
         />
       </div>
-
       <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottom: "2px solid #e0e0e0" 
+          borderBottom: "2px solid #e0e0e0",
         }}
       >
         <P text="Payment" />
@@ -206,8 +230,13 @@ const handleSubmit = async (e) => {
           onChange={handleChange}
         />
       </div>
-
-      <div style={{ display: "flex", alignItems: "center", borderBottom: "2px solid #e0e0e0"  }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          borderBottom: "2px solid #e0e0e0",
+        }}
+      >
         <P text="Working hours" />
         <CustomInput
           type="number"
@@ -218,19 +247,36 @@ const handleSubmit = async (e) => {
       </div>
       <P text="Add an image:" />
       <div style={{ display: "flex", alignItems: "center" }}>
-        
         <input type="file" onChange={handleImageChange} />
         <button onClick={handleUpload}>Upload</button>
       </div>
       {progress > 0 && (
-    <ProgressBar 
-        percent={progress} 
-        success={uploadSuccess === true ? "success" : (uploadSuccess === false ? "error" : null)} 
-        msg={uploadSuccess === true ? "" : (uploadSuccess === false ? "Upload Failed" : "Uploading...")}
-    />
-)}
-      {url && <img src={url} alt="Uploaded Job Image" style={{ width: 'auto', maxHeight: '200px' }} />}  {/* Display the uploaded image */}
-
+        <ProgressBar
+          percent={progress}
+          success={
+            uploadSuccess === true
+              ? "success"
+              : uploadSuccess === false
+              ? "error"
+              : null
+          }
+          msg={
+            uploadSuccess === true
+              ? ""
+              : uploadSuccess === false
+              ? "Upload Failed"
+              : "Uploading..."
+          }
+        />
+      )}
+      {url && (
+        <img
+          src={url}
+          alt="Uploaded Job Image"
+          style={{ width: "auto", maxHeight: "200px" }}
+        />
+      )}{" "}
+      {/* Display the uploaded image */}
       {formData.radioButton === "Employment" && (
         <div
           style={{
@@ -259,9 +305,17 @@ const handleSubmit = async (e) => {
               onChange={handleChange}
             />
           </div>
+          <button
+            type="button"
+            onClick={() =>
+              (window.location.href =
+                "https://buy.stripe.com/test_fZe16w8QR5m904EfYY")
+            }
+          >
+            Pay Now
+          </button>
         </div>
       )}
-
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <ButtonSubmit type="submit" text="POST" width={150} />
       </div>

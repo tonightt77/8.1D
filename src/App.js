@@ -11,17 +11,17 @@ import { AuthProvider } from ".//AuthContext";
 function App() {
   return (
     <AuthProvider>
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<NavFooter />}>
-          <Route index element={<HomePage />} />
-          <Route path="find-dev" element={<FindDev />} />
-          <Route path="find-job" element={<FindJob />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Signup />} />
-        </Route>
-      </Routes>
-    </div>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<NavFooter />}>
+              <Route index element={<HomePage />} />
+              <Route path="find-dev" element={<FindDev />} />
+              <Route path="find-job" element={<FindJob />} />
+              <Route path="login" element={<Login />} />
+              <Route path="register" element={<Signup />} />
+            </Route>
+          </Routes>
+        </div>
     </AuthProvider>
   );
 }
