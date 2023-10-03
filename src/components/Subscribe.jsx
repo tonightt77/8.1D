@@ -8,9 +8,9 @@ const Subscribe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Email from state:", email);
 
     try {
-      console.log("Email from state:", email);
 
       const response = await fetch('/.netlify/functions/subscribe', {
         method: 'POST',
