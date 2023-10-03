@@ -17,7 +17,7 @@ const Subscribe = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ email }),
       });
 
       const data = await response.json();
