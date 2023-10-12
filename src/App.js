@@ -6,6 +6,7 @@ import Signup from "./routes/Signup";
 import FindDev from "./routes/FindDev";
 import FindJob from "./routes/FindJob";
 import Profile from "./routes/Profile";
+import ForgotPassword from "./components/ForgotPassword";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from ".//AuthContext";
 
@@ -21,6 +22,7 @@ function App() {
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Signup />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="forgot-password" element={<ForgotPassword />} />
             </Route>
           </Routes>
         </div>

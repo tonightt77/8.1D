@@ -34,35 +34,38 @@ function ChangePasswordTab() {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
 
+    // Check if the new passwords entered by the user match
     if (formData.newPassword !== formData.renewPassword) {
-      alert("New passwords do not match!");
+      alert("New passwords do not match!"); // Alert the user if passwords do not match
       return;
     }
 
     try {
-      const user = auth.currentUser;
+      const user = auth.currentUser; // Get the currently authenticated user
       if (user) {
-        // Reauthenticate the user before updating the password
+        // Reauthenticate the user with the current password before making changes
         const credential = EmailAuthProvider.credential(
           user.email,
           formData.currentPassword
         );
         await reauthenticateWithCredential(user, credential);
 
-        // Update the password
+        // Update the user's password with the new password
         await updatePassword(user, formData.newPassword);
-        alert("Password updated successfully!");
-        setIsMfaResolved(false);
+        alert("Password updated successfully!"); // Inform the user of successful password update
+        setIsMfaResolved(false); // Reset the MFA resolution state
       } else {
-        alert("No authenticated user found!");
+        alert("No authenticated user found!"); // Alert if no authenticated user is found
       }
     } catch (error) {
+      // Handle errors, such as incorrect current password or MFA requirement
       if (error.code !== "auth/multi-factor-auth-required") {
-        setIsMfaResolved(false); // Reset the flag if the error is not related to MFA
+        setIsMfaResolved(false); // Reset the MFA resolution state if error is not MFA related
       }
       if (error.code === "auth/multi-factor-auth-required") {
+        // Handle MFA requirement by resolving the MFA process
         const resolver = getMultiFactorResolver(auth, error);
         const selectedHint = resolver.hints[0];
 
@@ -76,7 +79,7 @@ function ChangePasswordTab() {
           phoneInfoOptions,
           recaptchaVerifier
         );
-        const verificationCode = prompt("Enter the SMS verification code:");
+        const verificationCode = prompt("Enter the SMS verification code:"); // Prompt user for MFA code
         const cred = PhoneAuthProvider.credential(
           verificationId,
           verificationCode
@@ -84,19 +87,23 @@ function ChangePasswordTab() {
         const multiFactorAssertion = PhoneMultiFactorGenerator.assertion(cred);
 
         try {
+          // Resolve the MFA sign-in process with the provided MFA code
           await resolver.resolveSignIn(multiFactorAssertion);
-          setIsMfaResolved(true);
-          handleSubmit(e); // Retry the password update after MFA resolution
+          setIsMfaResolved(true); // Set the MFA resolution state as resolved
+          handleSubmit(e); // Retry the password update after resolving MFA
         } catch (mfaError) {
+          // Handle errors during the MFA resolution process
           console.error("Error resolving MFA:", mfaError.message);
           alert(mfaError.message);
         }
       } else {
+        // Handle other errors, such as incorrect current password
         console.error("Error updating password:", error.message);
         alert(error.message);
       }
     }
   };
+
   
 
   return (

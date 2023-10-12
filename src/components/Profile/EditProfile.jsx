@@ -77,12 +77,11 @@ function EditProfileTab() {
 
         uploadTask.on('state_changed', 
             (snapshot) => {
-                // Progress function ...
+                // log progress percentage
                 const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
                 console.log(`Upload is ${progress}% done`);
             }, 
             (error) => {
-                // Error function ...
                 console.error("Error uploading image:", error.message);
             }, 
             async () => {

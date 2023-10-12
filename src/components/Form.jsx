@@ -215,13 +215,19 @@ const handleGoogleLogin = async (e) => {
       )}
       
       <Button loading={isLoading} type='submit'>{formType === "login" ? "Login" : "Register"}</Button>
-      <hr />
+      {/* Button to navigate to the Forgot Password page */}
+      <Button type='button' onClick={() => navigate('/forgot-password')}>Forgot Password?</Button>
+      
       {formType === "login"?
       <><Button color='grey' onClick={handleGoogleLogin}><Icon name='google' />Login With Google</Button>
+      <hr />
       <a href="/register">Don't have an account? Register here.</a>
       <div id="recaptcha-container"></div></> 
         :
+        <>
+        <hr />
         <a href="/login">Already have an account? Login here.</a>
+        </>
       }      
     </Form>
   );

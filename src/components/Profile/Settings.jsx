@@ -83,45 +83,48 @@ function SettingsTab() {
 };
 
   
+// This useEffect hook is executed when the component is mounted. Its dependency array is empty, 
+// meaning it will only run once after the initial render. It is used to check the Multi-Factor Authentication (MFA) 
+// status of the currently authenticated user.
 useEffect(() => {
-  console.log("Checking MFA status...");
+  console.log("Checking MFA status..."); // Logging the start of the MFA status check
+  fetchMFAStatus(); // Calling the function to fetch the MFA status
+}, []);
 
-  const fetchMFAStatus = async () => {
-    try {
-      const user = auth.currentUser;
-      console.log("Current user:", user); // Log the current user
+// The fetchMFAStatus function is an asynchronous function responsible for checking whether MFA is enabled or disabled 
+// for the currently authenticated user. It updates the component state based on the MFA status.
+const fetchMFAStatus = async () => {
+  try {
+    const user = auth.currentUser; // Getting the current user
 
-      if (user) {
-        await user.reload();
-        //console.log("Reloaded user data:", user); // Log the reloaded user data
-        //console.log("Full user object:", user);
+    if (user) { // If a user is authenticated
+      await user.reload(); // Reload the user to get the latest user data
 
-        if (multiFactor(user) && multiFactor(user).enrolledFactors) {
-          const enrolledFactors = multiFactor(user).enrolledFactors;
-          console.log("User multiFactor property:", multiFactor(user));
+      // Checking if the user has enrolled factors for MFA
+      if (multiFactor(user) && multiFactor(user).enrolledFactors) {
+        const enrolledFactors = multiFactor(user).enrolledFactors; // Getting the enrolled factors
 
-          if (enrolledFactors.some(factor => factor.factorId === 'phone')) {
-            setIsMFAEnabled(true);
-            console.log("MFA is enabled");
-          } else {
-            setIsMFAEnabled(false);
-            console.log("MFA is not enabled");
-          }
+        // Checking if any of the enrolled factors is phone MFA
+        if (enrolledFactors.some(factor => factor.factorId === 'phone')) {
+          setIsMFAEnabled(true); // Setting the MFA status as enabled in the component state
+          console.log("MFA is enabled"); // Logging the MFA status
         } else {
-          setIsMFAEnabled(false);
-          console.log("User does not have multiFactor property or is not logged in");
+          setIsMFAEnabled(false); // Setting the MFA status as disabled in the component state
+          console.log("MFA is not enabled"); // Logging the MFA status
         }
       } else {
-        setIsMFAEnabled(false);
-        console.log("No authenticated user");
+        setIsMFAEnabled(false); // Setting the MFA status as disabled in the component state if no factors are enrolled
+        console.log("User does not have multiFactor property or is not logged in"); // Logging the absence of MFA factors
       }
-    } catch (error) {
-      console.error("Error fetching MFA status:", error);
+    } else {
+      setIsMFAEnabled(false); // Setting the MFA status as disabled in the component state if no user is authenticated
+      console.log("No authenticated user"); // Logging the absence of an authenticated user
     }
-  };
+  } catch (error) { // Catching and logging any errors that occur during the process
+    console.error("Error fetching MFA status:", error);
+  }
+};
 
-  fetchMFAStatus();
-}, []);
 
 
 
