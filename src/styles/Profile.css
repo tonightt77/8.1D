@@ -1,0 +1,194 @@
+/* Variables */
+:root {
+    --main-padding: 20px;
+    --main-bg-color: #f5f5f5;
+    --main-font: 'Arial', sans-serif;
+    --main-color: #333;
+    --secondary-color: #555;
+    --tertiary-color: #777;
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+    --border-color: #ddd;
+    --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Global Styles */
+body {
+    font-family: var(--main-font);
+}
+
+.main {
+    padding: var(--main-padding);
+    background-color: var(--main-bg-color);
+}
+
+.section, .card {
+    background-color: #fff;
+    padding: var(--main-padding);
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 -15px;
+}
+
+/* Page Title */
+.pagetitle {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pagetitle h1 {
+    color: var(--main-color);
+    font-size: 28px;
+    margin: 0;
+    padding: 10px 0;
+}
+
+/* Columns */
+.col-xl-4, .col-xl-8 {
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.col-xl-4 {
+    flex: none;
+    max-width: 25%;
+}
+
+.col-xl-8 {
+    flex-grow: 1;
+}
+
+/* Card */
+.card-body {
+    padding: var(--main-padding);
+}
+
+/* Profile Card */
+.profile-card {
+    text-align: center;
+}
+
+.profile-card img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.profile-card h2, .profile-card h3 {
+    margin: 10px 0;
+}
+
+.profile-card h2 {
+    font-size: 24px;
+    color: var(--main-color);
+}
+
+.profile-card h3 {
+    font-size: 18px;
+    color: var(--tertiary-color);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-links a {
+    color: var(--secondary-color);
+    font-size: 20px;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Tabs */
+.nav-tabs {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-link {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    padding: 10px 15px;
+    color: var(--secondary-color);
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+    background-color: #fff;
+    border-color: var(--border-color) var(--border-color) #fff;
+}
+
+/* Form Styles */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: none;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+/* Icons */
+.bi {
+    font-size: 20px;
+}
+
+/* Additional Styles (Grouped for clarity) */
+.label, .nav-item, .profile-overview .label {
+    font-weight: bold;
+    color: var(--secondary-color);
+    padding: 10px 0;
+}
+
+.profile-overview h5, .profile-edit img {
+    margin-top: 20px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+}
+
+.profile-overview .row, .profile-settings .form-check, .profile-change-password .form-control {
+    margin-top: 10px;
+}
+
+.profile-edit .btn-sm {
+    padding: 5px 10px;
+    margin-right: 5px;
+}

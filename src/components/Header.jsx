@@ -24,6 +24,9 @@ const MenuExampleHeader = () => {
       case '/register':
         setActiveItem('Create Account');
         break;
+      case '/profile':
+        setActiveItem('Profile');
+        break;
       default:
         setActiveItem('');
     }
@@ -58,10 +61,21 @@ const MenuExampleHeader = () => {
             />
           </Link>
           {auth.isLoggedIn ? (
+            <>
+            <Link to="/profile">
+            <Menu.Item
+              name="Profile"
+              active={activeItem === "Profile"}
+              onClick={handleItemClick}
+            />
+            </Link>
+            <Link to="/">
             <Menu.Item
               name="Logout"
               onClick={auth.logout}
             />
+            </Link>
+            </>
           ) : (
             <>
               <Link to="/login">

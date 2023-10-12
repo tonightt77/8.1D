@@ -1,10 +1,12 @@
 import React, {useState} from "react";
-import { Button, Checkbox, Form } from "semantic-ui-react";
+import { Button, Icon, Checkbox, Form } from "semantic-ui-react";
 import "../components/CustomForm.css"
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext';
+import { auth } from "../firebaseConfig";
 
+import { RecaptchaVerifier, sendEmailVerification } from "firebase/auth";
 
 
 const db = getFirestore();
@@ -39,20 +41,47 @@ const CustomForm = ({ formType }) => {
 
   const handleLogin = async () => {
     try {
-      await authContext.login(formData.email, formData.password);
-      navigate('/');// Redirect to home after successful login
+        // Initialize the recaptchaVerifier
+        const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'size': 'invisible',
+            'callback': async (response) => {
+                try {
+                    const userCredential = await authContext.login(formData.email, formData.password, recaptchaVerifier);
+
+                    // Check if the user's email is verified
+                    const user = userCredential.user;
+                    if (!user.emailVerified) {
+                        alert("Please verify your email before logging in.");
+                        // Send a verification email
+                        await sendEmailVerification(user);
+                        alert("Verification email sent. Please check your inbox.");
+                        return; // Exit the function early if the email is not verified
+                    }
+
+                    navigate('/'); // Redirect to home after successful login
+
+                } catch (error) {
+                    console.error("Error logging in:", error.message);
+                    if (error.code === "auth/wrong-password") {
+                        // Display an error message
+                        alert("Invalid email or password. Please try again.");
+                    } else {
+                        // Handle other errors
+                        alert("An error occurred. Please try again.");
+                    }
+                }
+            }
+        });
+
+        // Trigger the reCAPTCHA check
+        recaptchaVerifier.verify();
 
     } catch (error) {
-      console.error("Error logging in:", error.message);
-      if (error.code === "auth/invalid-login-credentials") {
-        // Display an error message
-        alert("Invalid email or password. Please try again.");
-      } else {
-        // Handle other errors
+        console.error("Error initializing reCAPTCHA:", error.message);
         alert("An error occurred. Please try again.");
-      }
     }
 };
+
 
 const handleRegister = async () => {
   // Validate the form data
@@ -86,6 +115,9 @@ const handleRegister = async () => {
 
     // Navigate to the login page after successful registration
     navigate('/login');
+    const user = userCredential.user;
+    await sendEmailVerification(user);
+    alert("Registration successful! Please verify your email before logging in.");
   } catch (error) {
     console.error("Error registering:", error.message);
 
@@ -99,6 +131,34 @@ const handleRegister = async () => {
     }
   }
 };
+
+
+const handleGoogleLogin = async (e) => {
+  e.preventDefault();
+
+  // Initialize the recaptchaVerifier
+  const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+    size: 'invisible',
+    'callback': async (response) => {
+      // reCAPTCHA solved - proceed with Google login.
+      try {
+        await authContext.loginWithGoogle(recaptchaVerifier);
+        navigate('/'); // Navigate to home after successful login
+      } catch (error) {
+        console.error("Error logging in with Google:", error.message);
+        alert("An error occurred. Please try again.");
+      }
+    }
+  });
+
+  try {
+    // Trigger the reCAPTCHA check
+    recaptchaVerifier.verify();
+  } catch (error) {
+    console.error("Error initializing reCAPTCHA:", error.message);
+  }
+};
+
 
 
   const [isLoading, setIsLoading] = useState(false);
@@ -155,6 +215,14 @@ const handleRegister = async () => {
       )}
       
       <Button loading={isLoading} type='submit'>{formType === "login" ? "Login" : "Register"}</Button>
+      <hr />
+      {formType === "login"?
+      <><Button color='grey' onClick={handleGoogleLogin}><Icon name='google' />Login With Google</Button>
+      <a href="/register">Don't have an account? Register here.</a>
+      <div id="recaptcha-container"></div></> 
+        :
+        <a href="/login">Already have an account? Login here.</a>
+      }      
     </Form>
   );
 }

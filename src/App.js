@@ -5,6 +5,7 @@ import Login from "./routes/Login";
 import Signup from "./routes/Signup";
 import FindDev from "./routes/FindDev";
 import FindJob from "./routes/FindJob";
+import Profile from "./routes/Profile";
 import { Routes, Route } from "react-router-dom";
 import { AuthProvider } from ".//AuthContext";
 
@@ -19,6 +20,7 @@ function App() {
               <Route path="find-job" element={<FindJob />} />
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Signup />} />
+              <Route path="profile" element={<Profile />} />
             </Route>
           </Routes>
         </div>

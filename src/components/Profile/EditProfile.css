@@ -1,0 +1,54 @@
+.tab-pane.profile-edit {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-edit .row {
+    margin-bottom: 15px;
+    align-items: center;
+    display: flex;
+}
+
+.profile-edit .label {
+    font-weight: bold;
+    color: #555;
+    flex: none;
+    text-align: right; /* Align the text to the right */
+    margin-left: 20px; /* Space to the left of the label */
+    padding-right: 10px; /* Some spacing from the input */
+}
+
+.profile-edit .col-lg-9, .profile-edit .col-md-8 {
+    color: #777;
+    flex: none;
+    width: 80%; /* Set the width to 70% */
+    margin-left: auto; /* Push the input to the right */
+}
+
+.profile-edit .form-control {
+    margin-left: auto;
+    justify-content: flex-end;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: 100%; /* Make sure the input takes up the full width of its container */
+}
+
+.profile-edit .btn {
+    margin-top: 10px;
+}
+
+.profile-edit img {
+    max-width: 100px;
+    margin-bottom: 10px;
+}
+
+.profile-edit .btn-sm {
+    margin-left: 5px;
+}
+
+.profile-edit .btn:hover {
+    background-color: #0056b3;
+}

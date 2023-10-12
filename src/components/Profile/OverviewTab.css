@@ -1,0 +1,30 @@
+.tab-pane.profile-overview {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-overview .row {
+    margin-bottom: 15px;
+    align-items: center;
+    display: flex; /* Make this a flex container */
+}
+
+.profile-overview .label {
+    font-weight: bold;
+    color: #555;
+    flex: none; /* This ensures the label doesn't grow or shrink */
+    text-align: right; /* Align the text to the right */
+    margin-left: 20px; /* Space to the left of the label */
+    padding-right: 10px;
+}
+
+.profile-overview .col-lg-9, .profile-overview .col-md-8 {
+    color: #777;
+    flex: none; /* This ensures the container doesn't grow or shrink */
+    border-bottom: 1px solid #ddd;
+    line-height: 3;
+    margin-left: auto; /* Push the content to the right */
+    width: 80%;
+}

@@ -1,0 +1,55 @@
+/* SettingsTab CSS */
+
+.tab-pane.profile-settings {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.profile-settings .row {
+    margin-bottom: 15px;
+    align-items: center;
+    display: flex;
+}
+
+.profile-settings label.col-md-4.col-lg-3.col-form-label {
+    font-weight: bold;
+    color: #555;
+    flex: none;
+    text-align: right;
+    margin-left: 20px;
+    padding-right: 10px;
+}
+
+.profile-settings .col-md-8.col-lg-9 {
+    flex: none;
+    margin-left: auto;
+    width: 80%;
+}
+
+.profile-settings .form-check {
+    margin-bottom: 10px;
+}
+
+.profile-settings .form-check-input {
+    margin-right: 5px;
+}
+
+.profile-settings .text-center {
+    margin-top: 20px;
+}
+
+.profile-settings .btn {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-settings .btn:hover {
+    background-color: #0056b3;
+}
